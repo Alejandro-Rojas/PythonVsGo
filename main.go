@@ -24,22 +24,22 @@ func BubbleSort(array []int) []int {
 	return array
 }
 
-// helper to find large number in the Radix Sort
-func largestNum(array2 []int) int {
-	largestNum := 0
+// find large number in the array
+func max(array2 []int) int {
+	max := 0
 
 	for i := 0; i < len(array2); i++ {
-		if array2[i] > largestNum {
-			largestNum = array2[i]
+		if array2[i] > max {
+			max = array2[i]
 		}
 	}
-	return largestNum
+	return max
 }
 
 // Radix Sort
 func radixSort(array2 []int) []int {
 	start_time := time.Now()
-	largestNum := largestNum(array2)
+	largestNum := max(array2)
 	size := len(array2)
 	significantDigit := 1
 	semiSorted := make([]int, size)
@@ -63,7 +63,6 @@ func radixSort(array2 []int) []int {
 		end_time := time.Now()
 		elapsed := end_time.Sub(start_time)
 		d2 := time.Duration(elapsed)
-		//fmt.Println("\tSorting: "+strconv.Itoa(significantDigit)+"'s place", array2)
 		fmt.Println("radixSort time: ", d2)
 
 	}
@@ -75,6 +74,7 @@ func init() {
 	rand.Seed(time.Now().UnixNano())
 }
 
+// Method that picks 10 numbers from 0 - 5000 to sort.
 func RangeInt(min int, max int, n int) []int {
 	arr := make([]int, n)
 	var r int
@@ -86,7 +86,7 @@ func RangeInt(min int, max int, n int) []int {
 
 func main() {
 	rand.Seed(time.Now().UnixNano())
-	array := RangeInt(0, 5000, 10)
+	array := RangeInt(0, 5000, 1000)
 	//array := []int{54, 26, 93, 17, 77, 31, 44, 55, 20}
 	rand.Shuffle(len(array), func(i, j int) { array[i], array[j] = array[j], array[i] })
 	fmt.Println("bubbleSort time:", BubbleSort(array))
